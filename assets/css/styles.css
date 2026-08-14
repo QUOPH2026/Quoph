@@ -237,7 +237,7 @@ p{ margin:0 0 1rem; }
 }
 .card:hover{ border-color:var(--line); box-shadow:var(--shadow); transform:translateY(-3px); }
 .card-media{
-  position:relative; aspect-ratio:1/1;
+  position:relative; aspect-ratio:3/4;
   background:linear-gradient(160deg,var(--bone) 0%,var(--bone-2) 100%);
   display:grid; place-items:center; overflow:hidden;
 }
@@ -253,7 +253,9 @@ p{ margin:0 0 1rem; }
 .card-desc{ font-size:.84rem; color:var(--ink-soft); font-weight:300; margin:0; flex:1; }
 .card-foot{ display:flex; align-items:center; justify-content:space-between; gap:.6rem; margin-top:.9rem; }
 .card-price{ font-family:var(--serif); font-size:1.3rem; }
+.card-price--consultar{ font-size:.95rem; font-style:italic; color:var(--ink-soft); }
 .add-btn{
+  display:inline-block; text-decoration:none; color:inherit;
   padding:.55rem 1rem; background:none; border:1px solid var(--line);
   border-radius:var(--r); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
   cursor:pointer; transition:all var(--t); white-space:nowrap;

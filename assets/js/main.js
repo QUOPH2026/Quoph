@@ -98,6 +98,16 @@
 
     grid.innerHTML = lista.map(p => {
       const cat = CATEGORIAS.find(c => c.id === p.cat);
+
+      /* Productos sin precio: se consultan por WhatsApp, no van al carrito */
+      const valor = p.precio
+        ? `<span class="card-price">${precio(p.precio)}</span>`
+        : `<span class="card-price card-price--consultar">Consultar</span>`;
+      const accion = p.precio
+        ? `<button class="add-btn" data-add="${p.id}">Agregar</button>`
+        : `<a class="add-btn" target="_blank" rel="noopener"
+              href="${waLink(CONFIG.waTienda, `¡Hola Quoph! Quiero consultar el valor de: ${p.nombre}.`)}">Consultar</a>`;
+
       return `
       <article class="card">
         <div class="card-media">
@@ -108,8 +118,8 @@
           <h3 class="card-title">${p.nombre}</h3>
           <p class="card-desc">${p.desc}</p>
           <div class="card-foot">
-            <span class="card-price">${precio(p.precio)}</span>
-            <button class="add-btn" data-add="${p.id}">Agregar</button>
+            ${valor}
+            ${accion}
           </div>
         </div>
       </article>`;
@@ -156,7 +166,7 @@
       const data = raw ? JSON.parse(raw) : [];
       // Descarta productos que ya no existen en el catálogo
       return Array.isArray(data)
-        ? data.filter(i => PRODUCTOS.some(p => p.id === i.id) && i.qty > 0)
+        ? data.filter(i => i.qty > 0 && PRODUCTOS.some(p => p.id === i.id && p.precio))
         : [];
     } catch { return []; }
   }
@@ -166,13 +176,14 @@
   }
 
   function agregar(id) {
+    const prod = PRODUCTOS.find(x => x.id === id);
+    if (!prod || !prod.precio) return;          // los "a consultar" no van al carrito
     const item = carrito.find(i => i.id === id);
     if (item) item.qty += 1;
     else carrito.push({ id, qty: 1 });
     guardarCarrito();
     pintarCarrito();
-    const p = PRODUCTOS.find(x => x.id === id);
-    toast(`${p.nombre} · agregado al carrito`);
+    toast(`${prod.nombre} · agregado al carrito`);
   }
 
   function cambiarQty(id, delta) {

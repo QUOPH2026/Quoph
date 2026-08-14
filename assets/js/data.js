@@ -41,8 +41,11 @@ const GLYPHS = {
 };
 
 /* ---------------- Catálogo de productos ------------------
-   precio  → número entero en pesos chilenos
+   precio  → número entero en pesos chilenos.
+             Si pones `null`, la ficha muestra "Consultar" y el botón abre
+             WhatsApp preguntando por ese producto en vez de agregarlo al carrito.
    img     → (opcional) 'assets/img/productos/mi-foto.jpg'
+             Formato ideal: vertical 3:4 (por ejemplo 900 × 1200 px).
    ---------------------------------------------------------
    ⚠ Los precios son referenciales: ajústalos a los reales.
    ========================================================= */
@@ -76,11 +79,26 @@ const PRODUCTOS = [
   { id:'a4', cat:'amuletos', nombre:'Herradura de la suerte', desc:'Fortuna y resguardo en la entrada del hogar.', precio:5900 },
   { id:'a5', cat:'amuletos', nombre:'Pulsera de siete metales', desc:'Equilibrio planetario y protección diaria.', precio:7500 },
 
-  /* Figuras */
-  { id:'f1', cat:'figuras', nombre:'Buda de la abundancia', desc:'Resina policromada, 15 cm.', precio:12000 },
-  { id:'f2', cat:'figuras', nombre:'Santa Muerte 15 cm', desc:'Imagen tradicional en resina.', precio:18900 },
-  { id:'f3', cat:'figuras', nombre:'Ganesha', desc:'Remueve obstáculos y abre caminos.', precio:14500 },
-  { id:'f4', cat:'figuras', nombre:'San Miguel Arcángel', desc:'Defensa espiritual y corte de lazos.', precio:16900 },
+  /* Figuras de yeso — piezas reales de la tienda, pintadas a mano.
+     ⚠ Los significados de cada color los escribí según la tradición:
+     revísalos y ajústalos a como tú los trabajas. */
+  { id:'f-sm88',  cat:'figuras', nombre:'Santa Muerte 7 colores 88 cm', desc:'Pieza mayor de altar. Los siete colores en un solo manto, con guadaña, libro, esfera y base de calaveras.', precio:250000, img:'assets/img/productos/santa-muerte-7-colores-88cm.jpg' },
+  { id:'f-cip28', cat:'figuras', nombre:'San Cipriano 28 cm', desc:'El santo de los magos y hechiceros, con su libro abierto, la calavera y la tentación a su espalda.', precio:29990, img:'assets/img/productos/san-cipriano-28cm.jpg' },
+  { id:'f-exp30', cat:'figuras', nombre:'San Expedito 30 cm', desc:'Patrono de las causas urgentes y de lo que no puede esperar.', precio:25000, img:'assets/img/productos/san-expedito-30cm.jpg' },
+
+  { id:'f-sm28h', cat:'figuras', nombre:'Santa Muerte hueso 28 cm', desc:'Acabado hueso con detalles dorados: búho, esfera y reloj de arena sobre monedas de oro.', precio:25000, img:'assets/img/productos/santa-muerte-hueso-28cm.jpg' },
+  { id:'f-sm28n', cat:'figuras', nombre:'Santa Muerte negra 28 cm', desc:'La negra, para la protección fuerte. Con búho, esfera y reloj de arena sobre monedas de oro.', precio:25000, img:'assets/img/productos/santa-muerte-negra-28cm.jpg' },
+  { id:'f-sm28b', cat:'figuras', nombre:'Santa Muerte blanca 28 cm', desc:'La blanca, para la limpieza y la paz. Con búho, esfera y reloj de arena sobre monedas de oro.', precio:25000, img:'assets/img/productos/santa-muerte-blanca-28cm.jpg' },
+  { id:'f-sm28r', cat:'figuras', nombre:'Santa Muerte roja 28 cm', desc:'La roja, para el amor y la pasión. Con búho, esfera y reloj de arena sobre monedas de oro.', precio:25000, img:'assets/img/productos/santa-muerte-roja-28cm.jpg' },
+
+  { id:'f-sm26b', cat:'figuras', nombre:'Santa Muerte blanca 26 cm', desc:'Manto con filos dorados, esfera azul y base de calaveras.', precio:21000, img:'assets/img/productos/santa-muerte-blanca-26cm.jpg' },
+  { id:'f-sm26n', cat:'figuras', nombre:'Santa Muerte negra 26 cm', desc:'Manto oscuro con filos dorados, esfera azul y base de calaveras.', precio:21000, img:'assets/img/productos/santa-muerte-negra-26cm.jpg' },
+
+  { id:'f-sm19b', cat:'figuras', nombre:'Santa Muerte blanca 19 cm', desc:'Tamaño mediano, con guadaña de hueso, calaveras y esfera.', precio:13000, img:'assets/img/productos/santa-muerte-blanca-19cm.jpg' },
+  { id:'f-sm19r', cat:'figuras', nombre:'Santa Muerte roja 19 cm', desc:'Tamaño mediano en rojo, con guadaña de hueso, calaveras y esfera.', precio:13000, img:'assets/img/productos/santa-muerte-roja-19cm.jpg' },
+
+  { id:'f-sm12a', cat:'figuras', nombre:'Santa Muerte amarilla 12 cm', desc:'Tamaño chico para altar o rincón de trabajo. La amarilla, para la salud y la prosperidad.', precio:9900, img:'assets/img/productos/santa-muerte-amarilla-12cm.jpg' },
+  { id:'f-sm12r', cat:'figuras', nombre:'Santa Muerte roja 12 cm', desc:'Tamaño chico para altar o rincón de trabajo. La roja, para el amor.', precio:9900, img:'assets/img/productos/santa-muerte-roja-12cm.jpg' },
 
   /* Insumos rituales */
   { id:'r1', cat:'rituales', nombre:'Baño energético de ruda', desc:'Preparado listo para limpieza personal.', precio:6900 },
