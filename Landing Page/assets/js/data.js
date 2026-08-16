@@ -1,0 +1,184 @@
+/* =========================================================
+   Quoph · Datos del sitio
+   ---------------------------------------------------------
+   EDITA ESTE ARCHIVO para cambiar precios, productos y
+   servicios. No necesitas tocar nada más.
+   ========================================================= */
+
+const CONFIG = {
+  /* Números de WhatsApp en formato internacional, sin + ni espacios */
+  waTienda: '56947073628',   // pedidos de la tienda
+  waTarot:  '56935068224',   // agenda de tarot con Simón
+
+  moneda: 'CLP',
+
+  horarios: {
+    // 0 = domingo … 6 = sábado
+    online:     { dias: [0,1,2,3,4,5,6], desde: 11, hasta: 23 },
+    presencial: { dias: [1,2,3,4,5],     desde: 11, hasta: 19 }
+  }
+};
+
+/* ---------------- Categorías del catálogo ---------------- */
+const CATEGORIAS = [
+  { id: 'velas',     nombre: 'Velas' },
+  { id: 'inciensos', nombre: 'Inciensos y sahumerios' },
+  { id: 'cuarzos',   nombre: 'Cuarzos y cristales' },
+  { id: 'amuletos',  nombre: 'Amuletos' },
+  { id: 'figuras',   nombre: 'Figuras' },
+  { id: 'rituales',  nombre: 'Insumos rituales' }
+];
+
+/* Ilustración de respaldo por categoría (se usa cuando el
+   producto todavía no tiene foto propia en `img`).        */
+const GLYPHS = {
+  velas:     '<path d="M24 6c2.5 3.2 4 5.6 4 7.6a4 4 0 0 1-8 0c0-2 1.5-4.4 4-7.6Z"/><rect x="17" y="20" width="14" height="22" rx="1.5"/><path d="M24 20v-2"/>',
+  inciensos: '<path d="M18 42h12"/><path d="M24 42V14"/><path d="M24 12c3-2.4 3-5 1.5-7 3 1 4.5 3.6 3.5 6.4-.8 2.2-3 3-5 2.6Z"/><path d="M15 30c-2 2-2 5 0 7M33 26c2 2 2 5 0 7"/>',
+  cuarzos:   '<path d="m24 5 11 12-11 26L13 17 24 5Z"/><path d="M13 17h22M24 5v38M18.5 11.5 24 17l5.5-5.5"/>',
+  amuletos:  '<circle cx="24" cy="27" r="13"/><path d="m24 17 3 8.5h8.5l-6.9 5.2 2.7 8.4L24 34l-7.3 5.1 2.7-8.4-6.9-5.2H21L24 17Z"/><path d="M20 10h8"/>',
+  figuras:   '<circle cx="24" cy="12" r="5"/><path d="M15 42c0-9 4-16 9-16s9 7 9 16Z"/><path d="M12 42h24"/>',
+  rituales:  '<path d="M11 20h26c0 8-5.8 14-13 14s-13-6-13-14Z"/><path d="M24 34v8M17 42h14"/><path d="M20 16c0-3 1.5-5 4-6-1 2.5-.5 4 1 5.5"/>'
+};
+
+/* ---------------- Catálogo de productos ------------------
+   precio  → número entero en pesos chilenos.
+             Si pones `null`, la ficha muestra "Consultar" y el botón abre
+             WhatsApp preguntando por ese producto en vez de agregarlo al carrito.
+   img     → (opcional) 'assets/img/productos/mi-foto.jpg'
+             Formato ideal: vertical 3:4 (por ejemplo 900 × 1200 px).
+   ---------------------------------------------------------
+   ⚠ Los precios son referenciales: ajústalos a los reales.
+   ========================================================= */
+const PRODUCTOS = [
+  /* Velas */
+  { id:'v1', cat:'velas', nombre:'Vela de miel artesanal', desc:'Endulzamiento y armonía en el hogar.', precio:3500 },
+  { id:'v2', cat:'velas', nombre:'Velón 7 mechas de abundancia', desc:'Para trabajos de prosperidad de siete días.', precio:8900 },
+  { id:'v3', cat:'velas', nombre:'Vela roja de amor', desc:'Atracción, pasión y reconciliación.', precio:3500 },
+  { id:'v4', cat:'velas', nombre:'Velón blanco de limpieza', desc:'Purificación de espacios y personas.', precio:4500 },
+  { id:'v5', cat:'velas', nombre:'Vela de soja aromática', desc:'Cera vegetal con aceites esenciales puros.', precio:7900 },
+
+  /* Inciensos y sahumerios */
+  { id:'i1', cat:'inciensos', nombre:'Palo Santo (caja de 20)', desc:'Madera sagrada del Perú para limpiar ambientes.', precio:3000 },
+  { id:'i2', cat:'inciensos', nombre:'Sahumerio de salvia blanca', desc:'Atado de salvia para limpieza profunda.', precio:5500 },
+  { id:'i3', cat:'inciensos', nombre:'Incienso Nag Champa', desc:'Clásico de la India, ideal para meditar.', precio:2500 },
+  { id:'i4', cat:'inciensos', nombre:'Sahumerio de romero y ruda', desc:'Corta malas vibras y envidias.', precio:4000 },
+  { id:'i5', cat:'inciensos', nombre:'Resina de copal + carboncillo', desc:'Sahumado tradicional para rituales.', precio:4800 },
+
+  /* Cuarzos y cristales — colgantes reales de la tienda.
+     Todos engarzados a mano en alpaca (plata alemana), $7.900 c/u.
+     ⚠ Las propiedades de cada piedra las escribí yo: revísalas. */
+  { id:'cr-cua45', cat:'cuarzos', nombre:'Colgante de cuarzo cristal 4,5 cm', desc:'Engarzado a mano en alpaca. El amplificador universal: claridad y limpieza.', precio:7900, img:'assets/img/productos/cristal-cuarzo-blanco-45cm.jpg' },
+  { id:'cr-cua4',  cat:'cuarzos', nombre:'Colgante de cuarzo cristal 4 cm',   desc:'Engarzado a mano en alpaca. El amplificador universal: claridad y limpieza.', precio:7900, img:'assets/img/productos/cristal-cuarzo-blanco-4cm.jpg' },
+
+  { id:'cr-ama5',  cat:'cuarzos', nombre:'Colgante de amatista 5 cm',                 desc:'Engarzado a mano en alpaca. Intuición, calma mental y protección.', precio:7900, img:'assets/img/productos/cristal-amatista-5cm.jpg' },
+  { id:'cr-ama3',  cat:'cuarzos', nombre:'Colgante de amatista morado intenso 3 cm',  desc:'Engarzado a mano en alpaca. Color profundo, pieza pequeña y sólida.', precio:7900, img:'assets/img/productos/cristal-amatista-intensa-3cm.jpg' },
+
+  { id:'cr-cit45', cat:'cuarzos', nombre:'Colgante de citrino 4,5 cm', desc:'Engarzado a mano en alpaca. Abundancia, voluntad y ánimo.', precio:7900, img:'assets/img/productos/cristal-citrino-45cm.jpg' },
+  { id:'cr-cit4',  cat:'cuarzos', nombre:'Colgante de citrino 4 cm',   desc:'Engarzado a mano en alpaca. Abundancia, voluntad y ánimo.', precio:7900, img:'assets/img/productos/cristal-citrino-4cm.jpg' },
+  { id:'cr-cit35', cat:'cuarzos', nombre:'Colgante de citrino 3,5 cm', desc:'Engarzado a mano en alpaca. Abundancia, voluntad y ánimo.', precio:7900, img:'assets/img/productos/cristal-citrino-35cm.jpg' },
+
+  { id:'cr-ahu45', cat:'cuarzos', nombre:'Colgante de cuarzo ahumado 4,5 cm', desc:'Engarzado a mano en alpaca. Anclaje a tierra y descarga de lo pesado.', precio:7900, img:'assets/img/productos/cristal-cuarzo-ahumado-45cm.jpg' },
+  { id:'cr-ahu4',  cat:'cuarzos', nombre:'Colgante de cuarzo ahumado 4 cm',   desc:'Engarzado a mano en alpaca. Anclaje a tierra y descarga de lo pesado.', precio:7900, img:'assets/img/productos/cristal-cuarzo-ahumado-4cm.jpg' },
+  { id:'cr-ahu35', cat:'cuarzos', nombre:'Colgante de cuarzo ahumado 3,5 cm', desc:'Engarzado a mano en alpaca. Anclaje a tierra y descarga de lo pesado.', precio:7900, img:'assets/img/productos/cristal-cuarzo-ahumado-35cm.jpg' },
+
+  { id:'cr-ros45', cat:'cuarzos', nombre:'Colgante de cuarzo rosado 4,5 cm', desc:'Engarzado a mano en alpaca. Amor propio y sanación emocional.', precio:7900, img:'assets/img/productos/cristal-cuarzo-rosado-45cm.jpg' },
+  { id:'cr-tur35', cat:'cuarzos', nombre:'Colgante de turmalina negra 3,5 cm', desc:'Engarzado a mano en alpaca. Escudo contra las malas energías.', precio:7900, img:'assets/img/productos/cristal-turmalina-negra-35cm.jpg' },
+
+  /* Amuletos */
+  { id:'a1', cat:'amuletos', nombre:'Ojo turco', desc:'Protección contra el mal de ojo.', precio:4500 },
+  { id:'a2', cat:'amuletos', nombre:'Péndulo de amatista', desc:'Radiestesia y trabajo con el subconsciente.', precio:9500 },
+  { id:'a3', cat:'amuletos', nombre:'Pentáculo de protección', desc:'Colgante en metal plateado con cordón.', precio:8900 },
+  { id:'a4', cat:'amuletos', nombre:'Herradura de la suerte', desc:'Fortuna y resguardo en la entrada del hogar.', precio:5900 },
+  { id:'a5', cat:'amuletos', nombre:'Pulsera de siete metales', desc:'Equilibrio planetario y protección diaria.', precio:7500 },
+
+  /* Figuras de yeso — piezas reales de la tienda, pintadas a mano.
+     ⚠ Los significados de cada color los escribí según la tradición:
+     revísalos y ajústalos a como tú los trabajas. */
+  { id:'f-sm88',  cat:'figuras', nombre:'Santa Muerte 7 colores 88 cm', desc:'Pieza mayor de altar. Los siete colores en un solo manto, con guadaña, libro, esfera y base de calaveras.', precio:250000, img:'assets/img/productos/santa-muerte-7-colores-88cm.jpg' },
+  { id:'f-cip28', cat:'figuras', nombre:'San Cipriano 28 cm', desc:'El santo de los magos y hechiceros, con su libro abierto, la calavera y la tentación a su espalda.', precio:29990, img:'assets/img/productos/san-cipriano-28cm.jpg' },
+  { id:'f-exp30', cat:'figuras', nombre:'San Expedito 30 cm', desc:'Patrono de las causas urgentes y de lo que no puede esperar.', precio:25000, img:'assets/img/productos/san-expedito-30cm.jpg' },
+
+  { id:'f-sm28h', cat:'figuras', nombre:'Santa Muerte hueso 28 cm', desc:'Acabado hueso con detalles dorados: búho, esfera y reloj de arena sobre monedas de oro.', precio:25000, img:'assets/img/productos/santa-muerte-hueso-28cm.jpg' },
+  { id:'f-sm28n', cat:'figuras', nombre:'Santa Muerte negra 28 cm', desc:'La negra, para la protección fuerte. Con búho, esfera y reloj de arena sobre monedas de oro.', precio:25000, img:'assets/img/productos/santa-muerte-negra-28cm.jpg' },
+  { id:'f-sm28b', cat:'figuras', nombre:'Santa Muerte blanca 28 cm', desc:'La blanca, para la limpieza y la paz. Con búho, esfera y reloj de arena sobre monedas de oro.', precio:25000, img:'assets/img/productos/santa-muerte-blanca-28cm.jpg' },
+  { id:'f-sm28r', cat:'figuras', nombre:'Santa Muerte roja 28 cm', desc:'La roja, para el amor y la pasión. Con búho, esfera y reloj de arena sobre monedas de oro.', precio:25000, img:'assets/img/productos/santa-muerte-roja-28cm.jpg' },
+
+  { id:'f-sm26b', cat:'figuras', nombre:'Santa Muerte blanca 26 cm', desc:'Manto con filos dorados, esfera azul y base de calaveras.', precio:21000, img:'assets/img/productos/santa-muerte-blanca-26cm.jpg' },
+  { id:'f-sm26n', cat:'figuras', nombre:'Santa Muerte negra 26 cm', desc:'Manto oscuro con filos dorados, esfera azul y base de calaveras.', precio:21000, img:'assets/img/productos/santa-muerte-negra-26cm.jpg' },
+
+  { id:'f-sm19b', cat:'figuras', nombre:'Santa Muerte blanca 19 cm', desc:'Tamaño mediano, con guadaña de hueso, calaveras y esfera.', precio:13000, img:'assets/img/productos/santa-muerte-blanca-19cm.jpg' },
+  { id:'f-sm19r', cat:'figuras', nombre:'Santa Muerte roja 19 cm', desc:'Tamaño mediano en rojo, con guadaña de hueso, calaveras y esfera.', precio:13000, img:'assets/img/productos/santa-muerte-roja-19cm.jpg' },
+
+  { id:'f-sm12a', cat:'figuras', nombre:'Santa Muerte amarilla 12 cm', desc:'Tamaño chico para altar o rincón de trabajo. La amarilla, para la salud y la prosperidad.', precio:9900, img:'assets/img/productos/santa-muerte-amarilla-12cm.jpg' },
+  { id:'f-sm12r', cat:'figuras', nombre:'Santa Muerte roja 12 cm', desc:'Tamaño chico para altar o rincón de trabajo. La roja, para el amor.', precio:9900, img:'assets/img/productos/santa-muerte-roja-12cm.jpg' },
+
+  /* Insumos rituales */
+  { id:'r1', cat:'rituales', nombre:'Baño energético de ruda', desc:'Preparado listo para limpieza personal.', precio:6900 },
+  { id:'r2', cat:'rituales', nombre:'Aceite ritual de abundancia', desc:'Para ungir velas, manos y amuletos.', precio:6500 },
+  { id:'r3', cat:'rituales', nombre:'Kit limpieza de hogar', desc:'Sahumerio, sal, vela y aceite en un pack.', precio:19900 },
+  { id:'r4', cat:'rituales', nombre:'Agua florida', desc:'Clásico esencial de todo altar.', precio:5500 },
+  { id:'r5', cat:'rituales', nombre:'Mortero de piedra', desc:'Para moler hierbas y resinas.', precio:15900 }
+];
+
+/* ---------------- Servicios de Tarot --------------------- */
+const SERVICIOS_TAROT = [
+  {
+    id: 'tarot-3',
+    nombre: '3 preguntas',
+    precio: 10000,
+    duracion: 'Preguntas libres',
+    desc: 'Ideal cuando llegas con dudas puntuales y necesitas una respuesta directa.',
+    incluye: [
+      'Tres preguntas sobre lo que necesites saber',
+      'Amor, trabajo, dinero, salud o familia',
+      'Lectura honesta, empática y confidencial'
+    ]
+  },
+  {
+    id: 'tarot-6',
+    nombre: '6 preguntas',
+    precio: 18000,
+    duracion: 'Preguntas libres',
+    desc: 'Más espacio para profundizar en un tema o abordar varias áreas de tu vida.',
+    incluye: [
+      'Seis preguntas libres',
+      'Ejemplo: qué piensa alguien de mí, cómo se proyecta mi relación',
+      'Orientación para tomar mejores decisiones'
+    ]
+  },
+  {
+    id: 'tarot-completo',
+    nombre: 'Sesión completa',
+    precio: 30000,
+    duracion: '1 hora 20 minutos',
+    destacado: 'La más completa',
+    desc: 'Una lectura profunda de tu pasado, presente y las tendencias que se proyectan hacia tu futuro.',
+    incluye: [
+      'Pasado que aún influye en tu presente',
+      'Tu presente emocional, espiritual y energético',
+      'Amor, dinero y trabajo',
+      'Salud desde una mirada holística',
+      'Bloqueos, karma y patrones repetitivos',
+      'Tendencias para los próximos 6 meses',
+      '5 preguntas libres al final'
+    ]
+  }
+];
+
+/* ---------------- Otros servicios ------------------------
+   precio: null  → se muestra "Valor a consultar"
+   ========================================================= */
+const SERVICIOS_OTROS = [
+  { id:'carta-astral',    nombre:'Carta astral',            precio:null, desc:'Tu mapa natal completo: personalidad, ciclos y potenciales.' },
+  { id:'carta-vocacional',nombre:'Carta vocacional',        precio:null, desc:'Orientación de propósito y camino laboral según tu carta.' },
+  { id:'compatibilidad',  nombre:'Compatibilidad amorosa',  precio:null, desc:'Análisis de vínculo entre dos cartas natales.' },
+  { id:'numerologia',     nombre:'Lectura numerológica',    precio:null, desc:'Tus números personales y el ciclo en que te encuentras.' },
+  { id:'quiromancia',     nombre:'Quiromancia',             precio:null, desc:'Lectura de manos, solo presencial en el local.' },
+  { id:'limpiezas',       nombre:'Limpiezas energéticas',   precio:null, desc:'Brujería, mal de ojo y malas vibras. Personas y hogares.' },
+  { id:'rituales',        nombre:'Rituales a medida',       precio:null, desc:'Abundancia, salud y amor, diseñados para tu caso.' },
+  { id:'chakras',         nombre:'Alineación de chakras',   precio:null, desc:'Trabajo energético para reordenar tus centros.' },
+  { id:'acupuntura',      nombre:'Acupuntura y medicina china', precio:null, desc:'Terapia con Simón Pedro, certificado por el MINSAL.' },
+  { id:'bach',            nombre:'Flores de Bach',          precio:null, desc:'Fórmula personalizada según tu estado emocional.' },
+  { id:'aromaterapia',    nombre:'Aromaterapia',            precio:null, desc:'Aceites esenciales para acompañar tu proceso.' },
+  { id:'cursos',          nombre:'Cursos',                  precio:null, desc:'Tarot profesional, velas, magia blanca y magia verde.' }
+];
