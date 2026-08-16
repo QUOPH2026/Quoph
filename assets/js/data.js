@@ -64,13 +64,25 @@ const PRODUCTOS = [
   { id:'i4', cat:'inciensos', nombre:'Sahumerio de romero y ruda', desc:'Corta malas vibras y envidias.', precio:4000 },
   { id:'i5', cat:'inciensos', nombre:'Resina de copal + carboncillo', desc:'Sahumado tradicional para rituales.', precio:4800 },
 
-  /* Cuarzos y cristales */
-  { id:'c1', cat:'cuarzos', nombre:'Cuarzo rosa en bruto', desc:'Amor propio y sanación emocional.', precio:6500 },
-  { id:'c2', cat:'cuarzos', nombre:'Punta generadora de amatista', desc:'Intuición, calma mental y protección.', precio:12900 },
-  { id:'c3', cat:'cuarzos', nombre:'Cuarzo blanco pulido', desc:'Amplificador universal de energía.', precio:5500 },
-  { id:'c4', cat:'cuarzos', nombre:'Obsidiana negra', desc:'Escudo energético y anclaje a tierra.', precio:7500 },
-  { id:'c5', cat:'cuarzos', nombre:'Pirita natural', desc:'La piedra del dinero y la voluntad.', precio:9900 },
-  { id:'c6', cat:'cuarzos', nombre:'Set 7 chakras', desc:'Siete piedras para alineación energética.', precio:14900 },
+  /* Cuarzos y cristales — colgantes reales de la tienda.
+     Todos engarzados a mano en alpaca (plata alemana), $7.900 c/u.
+     ⚠ Las propiedades de cada piedra las escribí yo: revísalas. */
+  { id:'cr-cua45', cat:'cuarzos', nombre:'Colgante de cuarzo cristal 4,5 cm', desc:'Engarzado a mano en alpaca. El amplificador universal: claridad y limpieza.', precio:7900, img:'assets/img/productos/cristal-cuarzo-blanco-45cm.jpg' },
+  { id:'cr-cua4',  cat:'cuarzos', nombre:'Colgante de cuarzo cristal 4 cm',   desc:'Engarzado a mano en alpaca. El amplificador universal: claridad y limpieza.', precio:7900, img:'assets/img/productos/cristal-cuarzo-blanco-4cm.jpg' },
+
+  { id:'cr-ama5',  cat:'cuarzos', nombre:'Colgante de amatista 5 cm',                 desc:'Engarzado a mano en alpaca. Intuición, calma mental y protección.', precio:7900, img:'assets/img/productos/cristal-amatista-5cm.jpg' },
+  { id:'cr-ama3',  cat:'cuarzos', nombre:'Colgante de amatista morado intenso 3 cm',  desc:'Engarzado a mano en alpaca. Color profundo, pieza pequeña y sólida.', precio:7900, img:'assets/img/productos/cristal-amatista-intensa-3cm.jpg' },
+
+  { id:'cr-cit45', cat:'cuarzos', nombre:'Colgante de citrino 4,5 cm', desc:'Engarzado a mano en alpaca. Abundancia, voluntad y ánimo.', precio:7900, img:'assets/img/productos/cristal-citrino-45cm.jpg' },
+  { id:'cr-cit4',  cat:'cuarzos', nombre:'Colgante de citrino 4 cm',   desc:'Engarzado a mano en alpaca. Abundancia, voluntad y ánimo.', precio:7900, img:'assets/img/productos/cristal-citrino-4cm.jpg' },
+  { id:'cr-cit35', cat:'cuarzos', nombre:'Colgante de citrino 3,5 cm', desc:'Engarzado a mano en alpaca. Abundancia, voluntad y ánimo.', precio:7900, img:'assets/img/productos/cristal-citrino-35cm.jpg' },
+
+  { id:'cr-ahu45', cat:'cuarzos', nombre:'Colgante de cuarzo ahumado 4,5 cm', desc:'Engarzado a mano en alpaca. Anclaje a tierra y descarga de lo pesado.', precio:7900, img:'assets/img/productos/cristal-cuarzo-ahumado-45cm.jpg' },
+  { id:'cr-ahu4',  cat:'cuarzos', nombre:'Colgante de cuarzo ahumado 4 cm',   desc:'Engarzado a mano en alpaca. Anclaje a tierra y descarga de lo pesado.', precio:7900, img:'assets/img/productos/cristal-cuarzo-ahumado-4cm.jpg' },
+  { id:'cr-ahu35', cat:'cuarzos', nombre:'Colgante de cuarzo ahumado 3,5 cm', desc:'Engarzado a mano en alpaca. Anclaje a tierra y descarga de lo pesado.', precio:7900, img:'assets/img/productos/cristal-cuarzo-ahumado-35cm.jpg' },
+
+  { id:'cr-ros45', cat:'cuarzos', nombre:'Colgante de cuarzo rosado 4,5 cm', desc:'Engarzado a mano en alpaca. Amor propio y sanación emocional.', precio:7900, img:'assets/img/productos/cristal-cuarzo-rosado-45cm.jpg' },
+  { id:'cr-tur35', cat:'cuarzos', nombre:'Colgante de turmalina negra 3,5 cm', desc:'Engarzado a mano en alpaca. Escudo contra las malas energías.', precio:7900, img:'assets/img/productos/cristal-turmalina-negra-35cm.jpg' },
 
   /* Amuletos */
   { id:'a1', cat:'amuletos', nombre:'Ojo turco', desc:'Protección contra el mal de ojo.', precio:4500 },
